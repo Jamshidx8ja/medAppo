@@ -2,7 +2,11 @@ package com.example.med_appointment.service.impl;
 
 import com.example.med_appointment.dto.request.DoctorRequest;
 import com.example.med_appointment.dto.response.DoctorResponse;
+import com.example.med_appointment.entity.Doctor;
+import com.example.med_appointment.entity.template.User;
 import com.example.med_appointment.filter.DoctorFilter;
+import com.example.med_appointment.mapper.DoctorMapper;
+import com.example.med_appointment.repository.DoctorRepository;
 import com.example.med_appointment.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,23 +16,36 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
+    private final DoctorRepository doctorRepository;
+    private final DoctorMapper doctorMapper;
+
     @Override
     public List<DoctorResponse> getDoctorsList(DoctorFilter filter) {
-        return List.of();
+
+        return doctorRepository.findAllBYFilter(filter).getContent()
+                .stream().map(doctorMapper::toResponse).toList();
     }
 
     @Override
     public Object createDoctor(DoctorRequest request) {
-        return null;
+
+        Doctor doctor = doctorMapper.toEntity(request);
+        doctorRepository.save(doctor);
+        return doctorMapper.toResponse(doctor);
     }
 
     @Override
     public Object updateDoctor(DoctorRequest request, Integer doctorId) {
-        return null;
+
+        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
+        doctorMapper.updateEntity(request, doctor);
+        doctorRepository.save(doctor);
+        return doctorMapper.toResponse(doctor);
     }
 
     @Override
     public Object deleteDoctor(Integer doctorId) {
-        return null;
+        doctorRepository.deleteById(doctorId);
+        return "Bye, Mr Doc";
     }
 }

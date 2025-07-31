@@ -21,4 +21,6 @@ public class Patient extends User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @Column(nullable = false, length = 12)
+    private Integer phoneNumber;
 }
