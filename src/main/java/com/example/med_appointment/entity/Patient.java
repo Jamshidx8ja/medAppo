@@ -2,7 +2,6 @@ package com.example.med_appointment.entity;
 
 import com.example.med_appointment.entity.enums.Gender;
 import com.example.med_appointment.entity.template.User;
-import com.jayway.jsonpath.internal.function.numeric.Min;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
