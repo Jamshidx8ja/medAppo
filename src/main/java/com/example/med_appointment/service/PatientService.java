@@ -6,9 +6,12 @@ import com.example.med_appointment.entity.Patient;
 import com.example.med_appointment.filter.PatientFilter;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PatientService {
     List<PatientResponse> getPatientsList(PatientFilter filter);
+    Optional<PatientResponse> getPatientById(Integer patientId);
+
     Object createPatient(PatientRequest request);
     Object updatePatient(PatientRequest request, Integer patientId);
     Object deletePatient(Integer patientId);

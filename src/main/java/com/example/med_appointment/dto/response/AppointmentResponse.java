@@ -3,8 +3,10 @@ package com.example.med_appointment.dto.response;
 import java.time.LocalDateTime;
 
 public class AppointmentResponse {
-    private Integer appointmentId;
+    private Integer id;
     private String doctorName;
     private String patientName;
-    private LocalDateTime appointmentTime;
+    private LocalDateTime appointmentDate;
+    private String notes;
+
 }

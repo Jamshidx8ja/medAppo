@@ -4,5 +4,4 @@ public class DoctorResponse {
     private Integer id;
     private String name;
     private String specialty;
-    private String email;
 }

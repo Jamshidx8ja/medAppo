@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,20 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Object createAppointment(AppointmentRequest request) {
+    public List<AppointmentResponse> getAppointmentsByPatientId(Integer patientId) {
+        return appointmentRepository.findById(patientId)
+                .stream().map(appointmentMapper::toResponse).toList();
+    }
+
+
+    @Override
+    public Optional<AppointmentResponse> getAppointmentById(Integer appointmentId) {
+        return appointmentRepository.findById(appointmentId)
+                .map(appointmentMapper::toResponse);
+    }
+
+    @Override
+    public Object bookAppointment(AppointmentRequest request) {
 
         Appointment appointment = appointmentMapper.toEntity(request);
         appointmentRepository.save(appointment);

@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Patient extends User {
 
-    private int age;
+    private Integer age;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;

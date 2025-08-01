@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,12 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public Optional<PatientResponse> getPatientById(Integer patientId) {
+        return patientRepository.findById(patientId)
+                .map(patientMapper::toResponse);
+    }
+
+    @Override
     public Object createPatient(PatientRequest request) {
 
         Patient patient = patientMapper.toEntity(request);
@@ -36,7 +43,9 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Object updatePatient(PatientRequest request, Integer patientId) {
 
-        Patient patient = patientRepository.findById(patientId).orElseThrow();
+        Patient patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+
         patientMapper.updateEntity(request, patient);
         patientRepository.save(patient);
         return patientMapper.toResponse(patient);

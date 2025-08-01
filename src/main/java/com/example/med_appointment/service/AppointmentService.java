@@ -6,10 +6,18 @@ import com.example.med_appointment.entity.Appointment;
 import com.example.med_appointment.filter.AppointmentFilter;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AppointmentService {
     List<AppointmentResponse> getAppointmentsList(AppointmentFilter filter);
-    Object createAppointment(AppointmentRequest request);
+    List<AppointmentResponse> getAppointmentsByPatientId(Integer patientId);
+    Optional<AppointmentResponse> getAppointmentById(Integer appointmentId);
+
+    Object bookAppointment(AppointmentRequest request);
     Object updateAppointment(AppointmentRequest request, Integer appointmentId);
     Object deleteAppointment(Integer appointmentId);
+
 }
+
+
+

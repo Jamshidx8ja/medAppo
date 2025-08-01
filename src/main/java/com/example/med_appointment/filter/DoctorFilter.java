@@ -6,10 +6,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DoctorFilter {
-    private Integer size = 10;
-    private Integer page = 0;
-    private String searchKey;
-    private SortType sortType;
-    private Integer patientId;
+public class DoctorFilter extends BaseFilter {
+
 }

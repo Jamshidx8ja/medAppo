@@ -3,7 +3,6 @@ package com.example.med_appointment.service.impl;
 import com.example.med_appointment.dto.request.DoctorRequest;
 import com.example.med_appointment.dto.response.DoctorResponse;
 import com.example.med_appointment.entity.Doctor;
-import com.example.med_appointment.entity.template.User;
 import com.example.med_appointment.filter.DoctorFilter;
 import com.example.med_appointment.mapper.DoctorMapper;
 import com.example.med_appointment.repository.DoctorRepository;
@@ -12,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +27,13 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public Optional<DoctorResponse> getDoctorById(Integer doctorId) {
+        return doctorRepository.findById(doctorId)
+                .map(doctorMapper::toResponse);
+    }
+
+
+    @Override
     public Object createDoctor(DoctorRequest request) {
 
         Doctor doctor = doctorMapper.toEntity(request);
@@ -37,7 +44,9 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Object updateDoctor(DoctorRequest request, Integer doctorId) {
 
-        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
+        Doctor doctor = doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new RuntimeException("Doc not found"));
+
         doctorMapper.updateEntity(request, doctor);
         doctorRepository.save(doctor);
         return doctorMapper.toResponse(doctor);
