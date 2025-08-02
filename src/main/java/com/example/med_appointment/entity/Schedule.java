@@ -1,19 +1,15 @@
 package com.example.med_appointment.entity;
 
-import com.example.med_appointment.entity.enums.DayOfWeek;
-import com.example.med_appointment.entity.enums.Slot;
+
 import com.example.med_appointment.entity.template.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.print.Doc;
-import java.time.LocalDateTime;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -22,12 +18,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Schedule extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Doctor doctor;
 
     @Enumerated(EnumType.STRING)
-    private DayOfWeek day;
+    private DayOfWeek dayOfWeek;
 
-    @Enumerated(EnumType.STRING)
-    private Slot slot;
+    @Column(nullable = false)
+    private LocalTime startTime;
+    @Column(nullable = false)
+    private LocalTime endTime;
+
+    @Column(nullable = false)
+    private int slotDuration;
 }

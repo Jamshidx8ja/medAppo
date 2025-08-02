@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface DoctorService {
     List<DoctorResponse> getDoctorsList(DoctorFilter filter);
-    Optional<DoctorResponse> getDoctorById(Integer doctorId);
+    DoctorResponse getDoctorById(Integer doctorId);
 
     Object createDoctor(DoctorRequest request);
     Object updateDoctor(DoctorRequest request, Integer doctorId);

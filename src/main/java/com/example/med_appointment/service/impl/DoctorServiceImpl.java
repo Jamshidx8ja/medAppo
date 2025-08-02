@@ -7,6 +7,7 @@ import com.example.med_appointment.filter.DoctorFilter;
 import com.example.med_appointment.mapper.DoctorMapper;
 import com.example.med_appointment.repository.DoctorRepository;
 import com.example.med_appointment.service.DoctorService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +28,9 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Optional<DoctorResponse> getDoctorById(Integer doctorId) {
-        return doctorRepository.findById(doctorId)
-                .map(doctorMapper::toResponse);
+    public DoctorResponse getDoctorById(Integer doctorId) {
+        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow(EntityNotFoundException::new);
+        return doctorMapper.toResponse(doctor);
     }
 
 

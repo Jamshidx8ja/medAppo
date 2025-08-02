@@ -1,10 +1,12 @@
 package com.example.med_appointment.service;
 
+import com.example.med_appointment.dto.TimeSlotDTO;
 import com.example.med_appointment.dto.request.AppointmentRequest;
 import com.example.med_appointment.dto.response.AppointmentResponse;
 import com.example.med_appointment.entity.Appointment;
 import com.example.med_appointment.filter.AppointmentFilter;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +17,10 @@ public interface AppointmentService {
 
     Object bookAppointment(AppointmentRequest request);
     Object updateAppointment(AppointmentRequest request, Integer appointmentId);
-    Object deleteAppointment(Integer appointmentId);
 
+    Object cancelAppointment(Integer appointmentId);
+
+    List<TimeSlotDTO> getAvailableSlots(Integer doctorId, LocalDate date);
 }
 
 
