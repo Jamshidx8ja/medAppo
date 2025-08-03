@@ -4,14 +4,14 @@ import com.example.med_appointment.dto.request.AppointmentRequest;
 import com.example.med_appointment.dto.response.AppointmentResponse;
 import com.example.med_appointment.entity.Appointment;
 import com.example.med_appointment.filter.AppointmentFilter;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
+@Service
 public interface AppointmentService {
     List<AppointmentResponse> getAppointmentsList(AppointmentFilter filter);
     List<AppointmentResponse> getAppointmentsByPatientId(Integer patientId);
-    List<AppointmentResponse> getAvailableSessions(AppointmentFilter filter);
+    List<AppointmentResponse> getAvailableSlots(AppointmentFilter filter);
     AppointmentResponse getAppointmentById(Integer appointmentId);
 
     Object bookAppointment(AppointmentRequest request);

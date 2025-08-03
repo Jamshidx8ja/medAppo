@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
 public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository  appointmentRepository;
@@ -43,7 +42,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentResponse> getAvailableSessions(AppointmentFilter filter) {
+    public List<AppointmentResponse> getAvailableSlots(AppointmentFilter filter) {
         return List.of();
     }
 

@@ -4,7 +4,7 @@ import com.example.med_appointment.dto.request.PatientRequest;
 import com.example.med_appointment.dto.response.PatientResponse;
 import com.example.med_appointment.entity.Patient;
 import com.example.med_appointment.filter.PatientFilter;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
