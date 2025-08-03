@@ -11,11 +11,12 @@ import java.util.Optional;
 public interface AppointmentService {
     List<AppointmentResponse> getAppointmentsList(AppointmentFilter filter);
     List<AppointmentResponse> getAppointmentsByPatientId(Integer patientId);
-    Optional<AppointmentResponse> getAppointmentById(Integer appointmentId);
+    List<AppointmentResponse> getAvailableSessions(AppointmentFilter filter);
+    AppointmentResponse getAppointmentById(Integer appointmentId);
 
     Object bookAppointment(AppointmentRequest request);
     Object updateAppointment(AppointmentRequest request, Integer appointmentId);
-    Object deleteAppointment(Integer appointmentId);
+    Object cancelAppointment(Integer appointmentId);
 
 }
 

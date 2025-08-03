@@ -1,14 +1,26 @@
 package com.example.med_appointment.dto.request;
 
 import com.example.med_appointment.entity.enums.Slot;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+@Getter
+@Setter
 public class AppointmentRequest {
 
+    @NotBlank
     private Integer patientId;
+    @NotBlank
     private Integer doctorId;
-    private LocalDate date;
+    @NotBlank
+    private LocalDateTime dateTime;
+    @NotBlank
     private Slot slot;
+    @NotBlank
+    private String notes;
+
 
 }

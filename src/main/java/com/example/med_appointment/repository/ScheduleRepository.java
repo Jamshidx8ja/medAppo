@@ -5,4 +5,6 @@ import com.example.med_appointment.service.ScheduleService;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ScheduleRepository extends JpaRepository<Schedule,Integer>, ScheduleCompositeRepository {
+
+    void deleteByDoctorId(Integer doctorId);
 }
