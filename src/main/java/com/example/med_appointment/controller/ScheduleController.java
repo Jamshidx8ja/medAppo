@@ -13,26 +13,26 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/schedule")
 @RequiredArgsConstructor
 public class ScheduleController {
-    private final ScheduleService service;
+    private final ScheduleService scheduleService;
 
     @GetMapping("doctor-schedule/{doctorId}")
     public ResponseEntity<?> getScheduleByDoctorId(@RequestParam Integer doctorId){
-        ScheduleResponse response = service.getScheduleByDoctorId(doctorId);
+        ScheduleResponse response = scheduleService.getScheduleByDoctorId(doctorId);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("create")
     public ResponseEntity<?> create(@RequestBody ScheduleRequest request){
-        return ResponseEntity.ok(service.createSchedule(request));
+        return ResponseEntity.ok(scheduleService.createSchedule(request));
     }
 
     @PutMapping("update/{scheduleId}")
     public ResponseEntity<?> update(@RequestBody ScheduleRequest request, @PathVariable Integer scheduleId){
-        return ResponseEntity.ok(service.updateSchedule(request, scheduleId));
+        return ResponseEntity.ok(scheduleService.updateSchedule(request, scheduleId));
     }
 
     @DeleteMapping("delete/{doctorId}")
     public ResponseEntity<?> delete(@PathVariable Integer doctorId){
-        return ResponseEntity.ok(service.deleteScheduleByDoctorId(doctorId));
+        return ResponseEntity.ok(scheduleService.deleteScheduleByDoctorId(doctorId));
     }
 }

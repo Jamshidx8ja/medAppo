@@ -1,10 +1,12 @@
 package com.example.med_appointment.service.impl;
 
+import com.example.med_appointment.dto.TimeSlotDTO;
 import com.example.med_appointment.dto.request.AppointmentRequest;
 import com.example.med_appointment.dto.response.AppointmentResponse;
 import com.example.med_appointment.entity.Appointment;
 import com.example.med_appointment.entity.Doctor;
 import com.example.med_appointment.entity.Patient;
+import com.example.med_appointment.entity.Schedule;
 import com.example.med_appointment.entity.enums.Status;
 import com.example.med_appointment.filter.AppointmentFilter;
 import com.example.med_appointment.mapper.AppointmentMapper;
@@ -17,9 +19,14 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 @RequiredArgsConstructor
 public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository  appointmentRepository;
@@ -42,8 +49,26 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentResponse> getAvailableSlots(AppointmentFilter filter) {
-        return List.of();
+    public List<TimeSlotDTO> getAvailableSlots(Integer doctorId, LocalDate date) {
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+        Schedule schedule = scheduleRepository.findByDoctorIdAndDayOfWeek(doctorId, dayOfWeek)
+                .orElseThrow(() -> new EntityNotFoundException("Schedule not found"));
+        List<LocalDateTime> slots = new ArrayList<>();
+
+        for (LocalTime time = schedule.getStartTime();
+             time.isBefore(schedule.getEndTime());
+             time = time.plusMinutes(schedule.getSlotDuration())) {
+
+            slots.add(LocalDateTime.of(date, time));
+        }
+
+        List<LocalDateTime> bookedSlots = appointmentRepository
+                .findAllByDoctorIdAndDate(doctorId, date).stream()
+                .map(Appointment::getDateTime).toList();
+
+        return slots.stream()
+                .filter(slot -> !bookedSlots.contains(slot))
+                .map(TimeSlotDTO::new).toList();
     }
 
 

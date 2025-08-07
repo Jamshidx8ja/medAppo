@@ -1,6 +1,5 @@
 package com.example.med_appointment.entity;
 
-import com.example.med_appointment.entity.enums.Slot;
 import com.example.med_appointment.entity.template.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity

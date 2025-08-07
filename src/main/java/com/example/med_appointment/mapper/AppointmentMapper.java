@@ -14,8 +14,10 @@ public interface AppointmentMapper {
     AppointmentMapper INSTANCE = Mappers.getMapper(AppointmentMapper.class);
     Appointment  toEntity(AppointmentRequest request);
 
-    @Mapping(target = "doctorName", source = "doctor.name")
-    @Mapping(target = "patientName", source = "patient.name")
+    @Mapping(target = "doctorFirstName", source = "doctor.firstName")
+    @Mapping(target = "doctorLastName", source = "doctor.lastName")
+    @Mapping(target = "patientFirstName", source = "patient.firstName")
+    @Mapping(target = "patientLastName", source = "patient.lastName")
     AppointmentResponse toResponse(Appointment appointment);
 
     void updateEntity(AppointmentRequest request, @MappingTarget Appointment appointment);

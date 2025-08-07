@@ -13,30 +13,30 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("patient")
 @RequiredArgsConstructor
 public class PatientController {
-    private final PatientService service;
+    private final PatientService patientService;
 
     @GetMapping("list")
     public ResponseEntity<?> getAllPatients(PatientFilter filter) {
-        return ResponseEntity.ok(service.getPatientsList(filter));
+        return ResponseEntity.ok(patientService.getPatientsList(filter));
     }
 
     @GetMapping("by-patientId/{patientId}")
     public ResponseEntity<?> getPatientById(@PathVariable Integer patientId) {
-        return ResponseEntity.ok(service.getPatientById(patientId));
+        return ResponseEntity.ok(patientService.getPatientById(patientId));
     }
 
     @PostMapping("create")
     public ResponseEntity<?> createPatient(@RequestBody PatientRequest patientRequest) {
-        return ResponseEntity.ok(service.createPatient(patientRequest));
+        return ResponseEntity.ok(patientService.createPatient(patientRequest));
     }
 
-    @PutMapping("update/{patiendId}")
+    @PutMapping("update/{patientId}")
     public ResponseEntity<?> updatePatient(@PathVariable Integer patientId, @RequestBody PatientRequest request) {
-        return ResponseEntity.ok(service.updatePatient(request,  patientId));
+        return ResponseEntity.ok(patientService.updatePatient(request,  patientId));
     }
 
     @DeleteMapping("delete/{patientId}")
     public ResponseEntity<?> deletePatient(@PathVariable Integer patientId) {
-        return ResponseEntity.ok(service.deletePatient(patientId));
+        return ResponseEntity.ok(patientService.deletePatient(patientId));
     }
 }

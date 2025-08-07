@@ -1,9 +1,9 @@
-package com.example.med_appointment.repository;
+package com.example.med_appointment.repository.custom;
 
 import com.example.med_appointment.entity.Patient;
 import com.example.med_appointment.filter.PatientFilter;
 import org.springframework.data.domain.Page;
 
-public interface PatientCompositeRepository {
+public interface PatientCustomRepository {
     Page<Patient> findAllByFilter(PatientFilter filter);
 }

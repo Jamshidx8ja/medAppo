@@ -1,9 +1,10 @@
 package com.example.med_appointment.dto.response;
 
-import com.example.med_appointment.entity.enums.DayOfWeek;
 import com.example.med_appointment.entity.enums.Slot;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.DayOfWeek;
 
 @Getter
 @Setter

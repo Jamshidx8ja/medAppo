@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public interface PatientService {
     List<PatientResponse> getPatientsList(PatientFilter filter);
     Optional<PatientResponse> getPatientById(Integer patientId);

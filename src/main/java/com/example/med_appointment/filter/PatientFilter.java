@@ -7,5 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PatientFilter extends BaseFilter {
-
+    private String firstName;
+    private String lastName;
 }
