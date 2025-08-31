@@ -11,7 +11,7 @@ _clean layered structure, JPA entities, DTOs, mapping and basic pagination/filte
 
 **Key technologies used:**
 
-• Java (modern LTS, e.g. 17+)
+• Java 21
 
 • Spring Boot (Web + Data)
 
